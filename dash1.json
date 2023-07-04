@@ -63,3 +63,15 @@
     ]
   }
 }
+
+
+//-------------------------------------------------------
+In this example, we have defined a simple custom dashboard with four widgets:
+
+"Current Problems": A problem list widget that displays the current issues or triggers with a priority of 4 or 5.
+"Network Traffic": A graph widget that shows the network traffic for a specific network interface (in this case, eth0) on a host named "MyRouter." The graph displays data for the last 1 hour.
+"CPU Usage": A graph widget that illustrates the CPU usage on a host named "MyServer." It shows the utilization of the "idle" CPU state for the last 1 hour.
+"Memory Usage": A graph widget that demonstrates the memory usage on a host named "MyServer." It displays the available memory size for the last 1 hour.
+You can customize this JSON payload according to your specific requirements, including the widget types, names, positions, filters, and time ranges. You can add or remove widgets and adjust their properties based on the metrics you want to monitor.
+
+Remember to use the Zabbix API to create or update the dashboard using the provided JSON payload.
