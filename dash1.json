@@ -1,0 +1,65 @@
+{
+  "dashboard": {
+    "name": "Network Monitoring Dashboard",
+    "widgets": [
+      {
+        "type": "problem_list",
+        "name": "Current Problems",
+        "row": 1,
+        "col": 1,
+        "width": 12,
+        "height": 4,
+        "resource": "triggers",
+        "filter": {
+          "value": "1",
+          "priority": [
+            "4",
+            "5"
+          ]
+        }
+      },
+      {
+        "type": "graph",
+        "name": "Network Traffic",
+        "row": 1,
+        "col": 13,
+        "width": 6,
+        "height": 4,
+        "resource": "item",
+        "filter": {
+          "host": "MyRouter",
+          "key": "net.if.in[eth0]"
+        },
+        "timeRange": "1h"
+      },
+      {
+        "type": "graph",
+        "name": "CPU Usage",
+        "row": 5,
+        "col": 1,
+        "width": 6,
+        "height": 4,
+        "resource": "item",
+        "filter": {
+          "host": "MyServer",
+          "key": "system.cpu.util[,idle]"
+        },
+        "timeRange": "1h"
+      },
+      {
+        "type": "graph",
+        "name": "Memory Usage",
+        "row": 5,
+        "col": 7,
+        "width": 6,
+        "height": 4,
+        "resource": "item",
+        "filter": {
+          "host": "MyServer",
+          "key": "vm.memory.size[available]"
+        },
+        "timeRange": "1h"
+      }
+    ]
+  }
+}
