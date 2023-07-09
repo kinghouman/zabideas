@@ -1,0 +1,101 @@
+using Renci.SshNet;
+using System;
+using System.Threading.Tasks;
+
+public async Task<bool> LoginToRouterAsync()
+{
+    // Router connection information
+    string host = "router_ip_address";
+    string username = "your_username";
+    string password = "your_password";
+    int port = 22;
+
+    // Create an SSH client
+    using (var client = new SshClient(host, port, username, password))
+    {
+        try
+        {
+            // Connect to the router asynchronously
+            await client.ConnectAsync();
+
+            if (client.IsConnected)
+            {
+                // Check if authentication succeeded
+                if (client.ConnectionInfo.AuthenticationResult == AuthenticationResult.Success)
+                {
+                    Console.WriteLine("Login successful.");
+                    return true;
+                }
+                else
+                {
+                    Console.WriteLine("Authentication failed.");
+                    return false;
+                }
+            }
+        }
+        catch (SshAuthenticationException)
+        {
+            Console.WriteLine("Authentication failed.");
+            return false;
+        }
+        catch (SshConnectionException)
+        {
+            Console.WriteLine("Failed to connect to the router.");
+            return false;
+        }
+        finally
+        {
+            // Disconnect from the router asynchronously
+            await client.DisconnectAsync();
+        }
+    }
+
+    return false;
+}
+
+public async Task ExecuteCommandAsync()
+{
+    // Router prompt
+    string routerPrompt = "router_prompt";
+
+    // Command to execute on the router
+    string command = "show version";
+
+    // Create an SSH client
+    using (var client = new SshClient("router_ip_address", "your_username", "your_password"))
+    {
+        try
+        {
+            // Connect to the router asynchronously
+            await client.ConnectAsync();
+
+            if (client.IsConnected)
+            {
+                // Login to the router
+                await client.LoginAsync();
+
+                // Wait for the router prompt
+                await client.WaitForShellPromptAsync(routerPrompt);
+
+                // Execute the command asynchronously
+                var commandResult = await client.RunCommandAsync(command);
+
+                // Display the command output
+                Console.WriteLine(commandResult.Result);
+            }
+        }
+        catch (SshConnectionException)
+        {
+            Console.WriteLine("Failed to connect to the router.");
+        }
+        catch (SshAuthenticationException)
+        {
+            Console.WriteLine("Authentication failed.");
+        }
+        finally
+        {
+            // Disconnect from the router asynchronously
+            await client.DisconnectAsync();
+        }
+    }
+}
