@@ -1,0 +1,72 @@
+using Renci.SshNet;
+using System;
+using System.Threading.Tasks;
+
+public async Task<bool> LoginToRouterAsync()
+{
+    // Router connection information
+    string host = "router_ip_address";
+    string username = "your_username";
+    string password = "your_password";
+    int port = 22;
+
+    // Create an SSH client
+    using (var client = new SshClient(host, port, username, password))
+    {
+        try
+        {
+            // Connect to the router asynchronously
+            await client.ConnectAsync();
+
+            if (client.IsConnected)
+            {
+                // Retrieve the initial login prompt
+                string loginPrompt = await client.ReadAsync();
+
+                // Check if the login prompt contains '>'
+                if (loginPrompt.Contains(">"))
+                {
+                    Console.WriteLine("Read-only prompt detected. Sending 'enable' command...");
+
+                    // Send 'enable' command
+                    client.RunCommand("enable");
+
+                    // Wait for the enable mode prompt
+                    string enableModePrompt = await client.ReadAsync();
+
+                    // Check if the enable mode prompt contains '#'
+                    if (enableModePrompt.Contains("#"))
+                    {
+                        Console.WriteLine("Enable mode prompt detected. Login successful.");
+                        return true;
+                    }
+                }
+                else if (loginPrompt.Contains("#"))
+                {
+                    Console.WriteLine("Enable mode prompt detected. Login successful.");
+                    return true;
+                }
+
+                Console.WriteLine("Login failed. Invalid prompt detected.");
+                return false;
+            }
+        }
+        catch (SshConnectionException)
+        {
+            Console.WriteLine("Failed to connect to the router.");
+            return false;
+        }
+        catch (SshAuthenticationException)
+        {
+            Console.WriteLine("Authentication failed.");
+            return false;
+        }
+        finally
+        {
+            // Disconnect from the router asynchronously
+            await client.DisconnectAsync();
+        }
+    }
+
+    return false;
+}
