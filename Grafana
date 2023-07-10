@@ -1,0 +1,22 @@
+To specify a proxy server that Grafana should use, you can configure the proxy settings in the Grafana environment variables or command-line options. Here's how you can do it:
+
+1. Environment Variables Method:
+   - Open a Command Prompt as an administrator.
+   - Set the following environment variables before starting the Grafana service:
+     ```
+     set HTTP_PROXY=http://proxy.example.com:8080
+     set HTTPS_PROXY=http://proxy.example.com:8080
+     ```
+     Replace `proxy.example.com:8080` with the address and port of your proxy server.
+   - Start the Grafana service.
+
+2. Command-Line Options Method:
+   - Open a Command Prompt as an administrator.
+   - Navigate to the Grafana installation directory (e.g., `C:\Program Files\GrafanaLabs\grafana`).
+   - Start the Grafana service using the `--http_proxy.url` and `--https_proxy.url` options:
+     ```
+     grafana-server --http_proxy.url=http://proxy.example.com:8080 --https_proxy.url=http://proxy.example.com:8080
+     ```
+     Replace `proxy.example.com:8080` with the address and port of your proxy server.
+
+By configuring either the environment variables or the command-line options with the appropriate proxy server details, Grafana will route its network traffic through the specified proxy server. Ensure that the proxy server address and port are correctly provided to match your environment's configuration.
