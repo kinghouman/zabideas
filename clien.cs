@@ -131,3 +131,29 @@ public class YourAPIObject
     // ...
 }
 
+//powershell
+$baseUrl = "https://example.com/api/some-endpoint"
+$username = "your-username"
+$password = "your-password"
+
+# Create a credential object with the username and password
+$credential = New-Object System.Management.Automation.PSCredential($username, (ConvertTo-SecureString -String $password -AsPlainText -Force))
+
+# Create a hashtable to specify the basic authentication header
+$headers = @{
+    "Authorization" = "Basic " + [System.Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes("$($credential.UserName):$($credential.GetNetworkCredential().Password)"))
+    "Content-Type" = "application/json"
+}
+
+# Create the body payload
+$body = @{
+    "key1" = "value1"
+    "key2" = "value2"
+} | ConvertTo-Json
+
+# Make the API POST request
+$response = Invoke-RestMethod -Uri $baseUrl -Method Post -Headers $headers -Body $body
+
+# Process the response
+$response
+
