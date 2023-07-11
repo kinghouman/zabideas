@@ -18,10 +18,16 @@ $headers = @{
     "Content-Type" = "application/json"
 }
 
-# Create the body payload
+# Create an array of strings
+$myArray = @("string1", "string/2", "string3")
+
+# Escape forward slashes in array elements
+$escapedArray = $myArray | ForEach-Object { $_ -replace "/", "\\/" }
+
+# Create the body payload with the escaped array
 $body = @{
     "key1" = "value1"
-    "key2" = "value2"
+    "key2" = $escapedArray
 } | ConvertTo-Json
 
 # Make the API POST request
