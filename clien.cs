@@ -63,3 +63,22 @@ class Program
         }
     }
 }
+
+//expiration
+int expireDateTimestamp = 1678901234; 
+DateTime referencePoint = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc); // Unix epoch
+
+DateTime expireDate = referencePoint.AddSeconds(expireDateTimestamp);
+DateTime currentDate = DateTime.UtcNow; // Get the current date and time in UTC
+
+if (expireDate > currentDate)
+{
+    // Token is not expired
+    Console.WriteLine("Token is still valid.");
+}
+else
+{
+    // Token is expired
+    Console.WriteLine("Token has expired.");
+}
+
