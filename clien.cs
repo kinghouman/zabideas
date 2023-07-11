@@ -81,4 +81,53 @@ else
     // Token is expired
     Console.WriteLine("Token has expired.");
 }
+//Bearer token with post api object
+using System;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+
+class Program
+{
+    static async Task Main()
+    {
+        string url = "https://example.com/api/some-endpoint";
+        string bearerToken = "your-bearer-token";
+
+        using (HttpClient client = new HttpClient())
+        {
+            // Set the bearer token
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", bearerToken);
+
+            // Create the API object
+            YourAPIObject apiObject = new YourAPIObject
+            {
+                // Set the properties of the API object
+                // ...
+            };
+
+            // Serialize the API object to JSON
+            string jsonContent = JsonConvert.SerializeObject(apiObject);
+
+            // Set the JSON content as the request body
+            StringContent content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+            // Make the HTTP POST request
+            HttpResponseMessage response = await client.PostAsync(url, content);
+            response.EnsureSuccessStatusCode();
+
+            // Process the response
+            string responseBody = await response.Content.ReadAsStringAsync();
+            Console.WriteLine(responseBody);
+        }
+    }
+}
+
+public class YourAPIObject
+{
+    // Define the properties of your API object
+    // ...
+}
 
