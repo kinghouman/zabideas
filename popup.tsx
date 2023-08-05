@@ -1,9 +1,13 @@
-import { Icon, Popup } from 'semantic-ui-react';
+import React, { useState } from 'react';
+import { Icon, Popup, Modal } from 'semantic-ui-react';
 
 const StatusIndicatorWithGrafana = ({
   // ... your props
 }) => {
   // ... your existing logic
+
+  // State to control the visibility of the modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Define the grid content
   const gridContent = (
@@ -12,20 +16,28 @@ const StatusIndicatorWithGrafana = ({
 
   // Define the trigger for the popup
   const trigger = (
-    <Popup
-      content="Click for more details"
-      trigger={<Icon color='grey' name='info circle' size='large' />}
+    <Icon
+      color='grey'
+      name='info circle'
+      size='large'
+      onClick={() => setIsModalOpen(true)}
     />
   );
 
   return (
-    <Popup
-      content={gridContent}
-      on='click' // Changed to click to avoid nested hover popups
-      position='top center'
-      wide
-      hoverable
-      trigger={trigger}
-    />
+    <>
+      <Popup
+        content="Click for more details"
+        trigger={trigger}
+      />
+
+      <Modal
+        open={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        closeIcon
+      >
+        {gridContent}
+      </Modal>
+    </>
   );
 };
