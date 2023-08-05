@@ -12,6 +12,16 @@ function YourComponent() {
     setPopupOpen(false);
   };
 
+  const handlePopupMouseEnter = () => {
+    // Add any actions you want to perform when the mouse enters the Popup content area
+    console.log('Mouse entered Popup area');
+  };
+
+  const handlePopupMouseLeave = () => {
+    // Add any actions you want to perform when the mouse leaves the Popup content area
+    console.log('Mouse left Popup area');
+  };
+
   return (
     <div>
       <Icon name="info circle" onClick={handleOpenPopup} />
@@ -20,7 +30,7 @@ function YourComponent() {
         open={isPopupOpen}
         onClose={handleClosePopup}
         content={
-          <div>
+          <div onMouseEnter={handlePopupMouseEnter} onMouseLeave={handlePopupMouseLeave}>
             <p>This is your Popup content.</p>
             <Icon name="close" onClick={handleClosePopup} />
           </div>
