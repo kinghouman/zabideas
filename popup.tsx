@@ -1,9 +1,4 @@
-<Table.Cell>
-  <div style={{ display: 'flex', alignItems: 'center' }}>
-    <div>Your Text</div>
-    <div>
-      <Icon name="icon1" />
-      <Icon name="icon2" />
-    </div>
-  </div>
-</Table.Cell>
+<Table.Row style={{ backgroundColor: '#FFFACD' }}> {/* LemonChiffon color */}
+  <Table.Cell>{item.time}</Table.Cell>
+  <Table.Cell>{item.humanValue}</Table.Cell>
+</Table.Row>
