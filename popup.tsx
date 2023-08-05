@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Popup, Button } from 'semantic-ui-react';
+import { Popup, Icon } from 'semantic-ui-react';
 
 function YourComponent() {
   const [isPopupOpen, setPopupOpen] = useState(false);
@@ -14,7 +14,7 @@ function YourComponent() {
 
   return (
     <div>
-      <Button onClick={handleOpenPopup}>Open Popup</Button>
+      <Icon name="info circle" onClick={handleOpenPopup} />
 
       <Popup
         open={isPopupOpen}
@@ -22,7 +22,7 @@ function YourComponent() {
         content={
           <div>
             <p>This is your Popup content.</p>
-            <Button onClick={handleClosePopup}>Close</Button>
+            <Icon name="close" onClick={handleClosePopup} />
           </div>
         }
         on="click"
