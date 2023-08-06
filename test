@@ -1,3 +1,6 @@
-const array = [1000001, 2000000, 1500000, 1200000];
-const allValuesGreaterThanOneMillion = array.every((value) => value > 1000000);
-console.log(allValuesGreaterThanOneMillion); // Output: true
+const combinedNumbers = [
+  ...array1.flatMap(obj => [obj.id, obj.code]),
+  ...array2.flatMap(obj => [obj.id, obj.code])
+];
+
+console.log(combinedNumbers);  // Output: [1234, 5678, 4321, 8765]
