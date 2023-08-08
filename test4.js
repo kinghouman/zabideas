@@ -45,3 +45,7 @@ if (okResult != null)
     var value = okResult.Value as string;  // Access the Value property
     Console.WriteLine(value);  // Should print "test"
 }
+
+
+var data = new { Value = "1234556666999666666666.44556677" };
+var jsonData = JsonConvert.SerializeObject(data); // using Newtonsoft.Json
