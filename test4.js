@@ -29,3 +29,19 @@ const payload = {
 };
 
 postData(mybackendURL, payload);
+
+// Let's assume your controller action looks something like this:
+public IActionResult Get()
+{
+    return Ok("test");
+}
+
+// To inspect the value:
+var actionResult = Get();
+var okResult = actionResult as OkObjectResult;  // Cast to OkObjectResult
+
+if (okResult != null)
+{
+    var value = okResult.Value as string;  // Access the Value property
+    Console.WriteLine(value);  // Should print "test"
+}
