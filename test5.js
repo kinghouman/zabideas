@@ -1,5 +1,28 @@
 
 .custom-cell {
+    padding: 0;
+    height: 100%; /* Ensure the cell takes the full height */
+}
+
+.vertical-split {
+    display: flex;
+    height: 100%;
+}
+
+.h1-content {
+    flex: 0.3;
+    display: flex;
+    align-items: center; /* Center content vertically */
+    padding-left: 10px;
+    border: 1px solid #ddd;
+    height: 100%; /* Make sure it takes the full height of its parent */
+}
+
+/* ... rest of your styles ... */
+
+
+
+.custom-cell {
     padding: 0; /* remove default padding to allow child divs to fill the cell */
 }
 
