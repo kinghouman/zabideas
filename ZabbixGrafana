@@ -1,0 +1,13 @@
+When you integrate Grafana with Zabbix through a datasource plugin, Grafana queries Zabbix for data that is available based on the configuration you've set up in Zabbix itself.
+
+Here's a brief explanation of the process:
+
+Zabbix Configuration: In Zabbix, you set up hosts (devices), items (metrics to monitor on those devices), and applications (groups of related items). When you configure these entities in Zabbix, they become available for querying through Zabbix's API.
+
+Zabbix API: Zabbix provides a JSON-RPC based API that allows external applications to fetch data from it. This includes data about hosts, items, applications, triggers, etc.
+
+Grafana-Zabbix Plugin: This plugin acts as a middleman between Grafana and Zabbix. When you configure a Zabbix datasource in Grafana, you are essentially giving Grafana the details it needs to query the Zabbix API.
+
+Grafana Queries: When you select a host in Grafana's dashboard, Grafana queries Zabbix's API for the applications associated with that host. It's the Zabbix API that returns the list of applications (like "Availability", "Hotfix", "Informational", etc.), and then Grafana displays them in its interface.
+
+To conclude, Grafana doesn't inherently "know" about the applications associated with a host. Instead, it actively queries Zabbix via the Zabbix API to fetch this information. The names and groupings you see are based on how you've set things up in your Zabbix instance.
