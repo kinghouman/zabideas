@@ -1,1 +1,1 @@
-https://alpha.sandstorm.io/grain/cs3GneaZoEjLmmL3ZZrboF
+https://etherpad.voice-ping.com/p/4ma3V-sKbSkTiZr5H1Qg
